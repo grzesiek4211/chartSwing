@@ -102,6 +102,42 @@ public class App  {
             }
         });
 
+          button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String parametr = (String) comboBox2.getSelectedItem();
+                System.out.println(parametr);
+
+                int draw = Reader.parameters.indexOf(parametr);
+
+
+                XYLineChart_AWT chartLine = new XYLineChart_AWT(draw, parametr);
+
+                panel2.removeAll();
+                panel2.revalidate();
+                panel2.repaint();
+                if (checkBox.isSelected()) {
+
+
+                    XYLogarithmicChart_AWT chartLog = new XYLogarithmicChart_AWT(draw, parametr);
+                    JScrollPane scroll = new JScrollPane(XYLogarithmicChart_AWT.chartPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                    panel2.add(scroll);
+
+                } else {
+
+                    JScrollPane scroll = new JScrollPane(XYLineChart_AWT.chartPanelLine, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                    panel2.add(scroll);
+
+                }
+
+                frame.getContentPane().add(BorderLayout.CENTER, panel2);
+
+                SwingUtilities.updateComponentTreeUI(frame);
+            }
+        });
+
         frame.getContentPane().add(BorderLayout.EAST, panel);
 
         frame.setVisible(true);
